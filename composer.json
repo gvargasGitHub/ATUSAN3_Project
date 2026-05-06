@@ -3,5 +3,6 @@
     "type": "project",
     "require": {
         "gvargas/atusan-core":"^3.0"
-    }
+    },
+    "minimum-stability": "stable"
 }
