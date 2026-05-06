@@ -1,0 +1,7 @@
+{
+    "name": "gvargas/atusan-project",
+    "type": "project",
+    "require": {
+        "gvargas/atusan-core":"^3.0"
+    }
+}

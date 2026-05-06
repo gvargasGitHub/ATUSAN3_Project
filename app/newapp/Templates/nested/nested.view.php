@@ -1,0 +1,1 @@
+<?= self::$module->write() ?>

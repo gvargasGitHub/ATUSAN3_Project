@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Root
+  xmlns:html="http://schemas.atusan.com/html/attributes"
+  xmlns:css="http://schemas.atusan.com/css/properties"
+  template="templates/noframe">
+  <DataForm 
+    name="df_login" 
+    title="Autenticación"
+    route="/login">
+    <ControlCsrf />
+    <ControlHidden name="version"/>
+    <ControlHidden name="migration"/>
+
+    <ControlText name="cuenta"
+      html:placeholder="Cuenta de Usuario" label="Cuenta" />
+    
+    <ControlPassword name="contrasena" 
+      html:placeholder="Contraseña" 
+      label="Contraseña:" />
+    
+    <ButtonGroupBar name="df_login_bg">
+      <Button name="btnSubmit" 
+        text="Entrar" 
+        html:title="Entrar" 
+        html:type="submit"/>
+    </ButtonGroupBar>
+  </DataForm>
+</Root>

@@ -1,0 +1,19 @@
+# Activa el motor de reescritura de URL de Apache.
+RewriteEngine On
+
+# Handle Authorization Header
+RewriteCond %{HTTP:Authorization} .
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+# Si el recurso solicitado NO es un archivo físico…
+RewriteCond %{REQUEST_FILENAME} !-f   
+  # evita que se intercepten archivos reales (.css, .js, imágenes)
+
+# …y tampoco es un directorio existente…
+RewriteCond %{REQUEST_FILENAME} !-d   
+  # evita que se intercepten carpetas que sí existen
+
+# Entonces redirige TODAS las peticiones a index.php,
+# preservando los parámetros (?a=b) y finalizando el proceso.
+RewriteRule ^ index.php/$1 [QSA,L]      
+# QSA = mantiene query string; L = última regla
