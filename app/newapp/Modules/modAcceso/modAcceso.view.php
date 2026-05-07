@@ -59,7 +59,7 @@
     // establece rutina programada cada 5 minutos para:
     // 1. Monitorea estado de bandera "logout" para
     //    cuestiones de mantenimiento de portal.
-    logoutIntervalId = setInterval(function() {
+    /*logoutIntervalId = setInterval(function() {
       ats.send('/state', {
         onDone: rs => {
           if (logoutState == 0 && rs.logout == 0) {
@@ -87,14 +87,16 @@
           }
         }
       });
-    }, (1000 * 10));
+    }, (1000 * 10));*/
   }
 
   df_login.onSubmitDone = function(rs) {
-    ats.openModule('/admin');
+    console.log('Probando Submit');
+    // ats.openModule('/admin');
   };
 
   df_login.onSubmitFail = function(msg) {
-    alert(msg);
+    console.log(msg);
+    alert(msg.message);
   };
 </script>

@@ -2,7 +2,7 @@
 <Root
   xmlns:html="http://schemas.atusan.com/html/attributes"
   xmlns:css="http://schemas.atusan.com/css/properties"
-  template="templates/noframe">
+  template="noframe">
   <DataForm 
     name="df_login" 
     title="Autenticación"
