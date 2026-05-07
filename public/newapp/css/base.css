@@ -1,0 +1,231 @@
+@charset "utf-8";
+
+/* ------------------------------------
+    Bloques Principales
+--------------------------------------- */
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  font-size: 1.2rem;
+}
+
+nav,
+content,
+footer {
+  position: fixed;
+  width: 100%;
+}
+
+nav {
+  top: 0;
+  left: 0;
+  height: 40px;
+}
+
+content {
+  top: 40px;
+  left: 0;
+  bottom: 30px;
+  overflow-y: scroll;
+}
+
+footer {
+  bottom: 0;
+  height: 30px;
+  text-align: center;
+}
+
+/* ------------------------------------
+    NavBar
+--------------------------------------- */
+.ats-navbar .title {
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin: 0 20px 0 8px;
+}
+
+.ats-navbar .title,
+.ats-navbar li.item,
+.ats-navbar div.bars {
+  padding: 10px 8px;
+}
+
+.ats-navbar li.item:hover {
+  outline-width: 1px;
+  outline-style: dotted;
+}
+
+.ats-navbar div.content {
+  padding: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+/* ------------------------------------
+    SideBar
+--------------------------------------- */
+.ats-sidebar {
+  padding: 10px;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 10px;
+}
+
+.ats-sidebar .title {
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin: 0 20px 0 8px;
+}
+
+.ats-sidebar .title,
+.ats-sidebar li.item,
+.ats-sidebar div.bars {
+  padding: 10px 8px;
+}
+
+.ats-sidebar li.item:hover {
+  outline-width: 1px;
+  outline-style: dotted;
+}
+
+/* ------------------------------------
+    MODAL
+--------------------------------------- */
+.ats-modal div.content {
+  margin: 5% auto;
+  max-width: 90%;
+}
+
+@media only screen and (min-width: 768px) {
+  .ats-modal div.content {
+    max-width: 50%;
+  }
+}
+
+/* ------------------------------------
+  TABGROUP
+------------------------------------ */
+.ats-tabgroup .buttons button {
+  padding: 7px 8px;
+
+  border-width: 1px;
+  border-style: solid;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.ats-tabgroup .contents .content {
+  padding: 0;
+  overflow: scroll;
+}
+
+/* ------------------------------------
+  BUTTONS
+------------------------------------ */
+.ats-btn {
+  padding: 12px;
+}
+
+/* ------------------------------------
+    DataForms
+--------------------------------------- */
+.ats-dataform .form-control {
+  padding: 3px 5px;
+}
+
+.ats-dataform .switch {
+  width: 40px;
+  height: 24px;
+}
+
+.ats-dataform .switch span.slider {
+  border-radius: 24px;
+}
+
+.ats-dataform .switch span.slider:before {
+  height: 16px;
+  width: 16px;
+}
+
+.ats-dataform .switch input:checked+.slider::before {
+  -webkit-transform: translateX(16px);
+  -ms-transform: translateX(16px);
+  transform: translateX(16px);
+}
+
+/* ------------------------------------
+    DataGrid
+--------------------------------------- */
+.ats-datagrid {
+  padding: 10px;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 10px;
+}
+
+.ats-datagrid div.body>table>thead>tr>th {
+  padding: 3px 10px;
+  vertical-align: bottom;
+  text-align: left;
+
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+}
+
+.ats-datagrid div.body>table>tbody>tr>td.data {
+  padding: 3px 4px;
+  vertical-align: middle;
+
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+}
+
+.ats-datagrid .switch {
+  width: 40px;
+  height: 24px;
+}
+
+.ats-datagrid .switch span.slider {
+  border-radius: 24px;
+}
+
+.ats-datagrid .switch span.slider:before {
+  height: 16px;
+  width: 16px;
+}
+
+.ats-datagrid .switch input:checked+.slider::before {
+  -webkit-transform: translateX(16px);
+  -ms-transform: translateX(16px);
+  transform: translateX(16px);
+}
+
+.ats-datagrid div.body td.menu-options div.content {
+  padding: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.ats-datagrid div.body td.menu-options div.content a.option {
+  padding: 3px;
+}
+
+/* ------------------------------------
+    DATATREE
+--------------------------------------- */
+.ats-datatree div.body .item.selected {
+  background-color: var(--color-primary-base);
+}
+
+/* ------------------------------------
+    PANELS
+--------------------------------------- */
+.ats-panel .panel {
+  overflow: hidden;
+  padding: 2px;
+}

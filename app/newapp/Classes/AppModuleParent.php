@@ -2,7 +2,6 @@
 
 namespace App\Classes;
 
-use App\Models\AppModuleParentModel;
 use Atusan\Controller\Module;
 use Atusan\Session\AppSession;
 

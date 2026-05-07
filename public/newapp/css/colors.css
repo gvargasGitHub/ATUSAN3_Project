@@ -1,0 +1,269 @@
+/*
+Steel Blue #4682b4
+https://www.w3schools.com/colors/colors_picker.asp?colorhex=4682B4
+*/
+:root {
+  --color-primary-dark: #4682b4;
+  /* 49% */
+  --color-primary-base: #91b6d4;
+  /* 70%% */
+  --color-primary-soft: #dae7f1;
+  /* 90% */
+  --color-primary-fade: #edf3f8;
+  /* 95% */
+
+  --color-mainframe-background: white;
+  --color-input-background: #e2e6e9;
+  --color-input-border: #555555;
+
+  --color-inactive: #2F3D3D;
+  --color-active: #f58d56;
+
+  --text-color-base: #333;
+  --text-color-placeholder: #646360;
+  --text-color-thead: #C6C3BF;
+  --text-color-label: #BBC3AF;
+}
+
+/* ------------------------------------
+    Bloques Principales
+--------------------------------------- */
+body {
+  color: var(--text-color-base);
+}
+
+footer {
+  background-color: var(--color-primary-dark);
+  color: white;
+}
+
+
+content {
+  background-color: var(--color-primary-fade);
+}
+
+/* ------------------------------------
+    NavBar
+--------------------------------------- */
+.ats-navbar {
+  background-color: var(--color-primary-dark);
+  color: white;
+}
+
+.ats-navbar>ul>li.dropdown>div.content {
+  color: var(--text-color-base);
+}
+
+@media screen and (max-width: 768px) {
+
+  .ats-navbar.responsive li.item:hover {
+    background-color: var(--color-primary-base);
+    color: white;
+  }
+
+  .ats-navbar>div.bars div.bar,
+  .ats-sidebar>div.bars div.bar {
+    background-color: white;
+  }
+}
+
+/* ------------------------------------
+    SideBar
+--------------------------------------- */
+.ats-sidebar {
+  background-color: var(--color-primary-soft);
+  border-color: var(--color-primary-soft);
+}
+
+@media screen and (max-width: 768px) {
+
+  .ats-sidebar.responsive li.item:hover {
+    background-color: var(--color-primary-base);
+    color: white;
+  }
+
+  .ats-sidebar>div.bars div.bar {
+    background-color: white;
+  }
+}
+
+/* ------------------------------------
+  TABGROUP
+------------------------------------ */
+.ats-tabgroup .buttons button {
+  border-color: var(--color-primary-soft);
+}
+
+.ats-tabgroup .buttons button:hover {
+  background-color: var(--color-primary-soft);
+}
+
+.ats-tabgroup .buttons button.active {
+  color: white;
+  background-color: var(--color-primary-base);
+}
+
+.ats-tabgroup-close {
+  color: white;
+}
+
+.ats-tabgroup-close:hover {
+  color: var(--color-secondary);
+}
+
+.ats-tabgroup .contents .content {
+  background-color: var(--color-primary-fade);
+}
+
+/* ------------------------------------
+  BUTTONS
+------------------------------------ */
+
+/* ------------------------------------
+    Modals
+--------------------------------------- */
+.ats-modal .content {
+  background-color: var(--color-primary-fade);
+}
+
+.ats-modal .header,
+.ats-modal .footer {
+  background-color: var(--color-primary-base);
+  color: white;
+}
+
+/* ------------------------------------
+    DataForms
+--------------------------------------- */
+.ats-dataform {
+  background-color: transparent;
+}
+
+.ats-dataform .form-control {
+  border-color: var(--color-input-background);
+  background-color: white;
+  color: var(--text-color-base);
+}
+
+.ats-dataform .form-control:focus {
+  border-color: var(--color-input-border);
+  background-color: white;
+}
+
+.ats-dataform .form-control::placeholder,
+.ats-dataform .form-control:-ms-input-placeholder,
+.ats-dataform .form-control::-ms-input-placeholder {
+  color: var(--text-color-placeholder);
+  opacity: 1;
+}
+
+.ats-dataform .switch input:checked+.slider {
+  background-color: var(--color-active);
+}
+
+.ats-dataform .switch input:focus+.slider {
+  box-shadow: 0 0 1px var(--color-active);
+}
+
+.ats-dataform .stepmarks .stepmark {
+  background-color: var(--color-active);
+}
+
+/* ------------------------------------
+    DataGrids
+--------------------------------------- */
+.ats-datagrid {
+  border-color: var(--color-primary-base);
+  background-color: white;
+}
+
+.ats-datagrid>table {
+  background-color: transparent;
+}
+
+
+.ats-datagrid th {
+  border-bottom-color: var(--color-primary-dark);
+}
+
+.ats-datagrid th,
+.ats-datagrid td {
+  border-bottom-color: var(--color-primary-fade);
+}
+
+/* Zebra */
+.ats-datagrid .row:nth-child(even) {
+  background-color: var(--color-primary-fade);
+}
+
+.ats-datagrid .row.selected {
+  background-color: var(--color-primary-base);
+  color: white;
+}
+
+.ats-datagrid .switch input:checked+.slider {
+  background-color: var(--color-active);
+}
+
+.ats-datagrid .switch input:focus+.slider {
+  box-shadow: 0 0 1px var(--color-active);
+}
+
+.ats-datagrid .menu-options-content {
+  color: var(--text-color-base);
+}
+
+/* ------------------------------------
+    DataTree
+--------------------------------------- */
+.ats-datatree .listitem {
+  border-bottom-color: var(--color-primary-soft);
+}
+
+.ats-datatree .listitem:hover {
+  outline: 1px dotted white;
+}
+
+/* .ats-datatree .listitem:hover .listitem-caret.caret::before {
+  color: white;
+} */
+
+.ats-datatree .listitem>table.selected {
+  background-color: var(--color-active);
+}
+
+.ats-datatree .listitem.selected>table>tbody>tr>td.listitem-text {
+  color: red;
+}
+
+.ats-datatree .listitem-caret.caret::before {
+  color: var(--color-primary-soft)
+}
+
+.ats-datatree .listitem-caret.caret-down::before {
+  color: white;
+}
+
+/* ------------------------------------
+    MFPanel
+--------------------------------------- */
+.mf-left-panel,
+.mf-right-panel {
+  background-color: var(--color-primary-fade);
+}
+
+/* ------------------------------------
+    FWAlert
+--------------------------------------- */
+.fwalert-content {
+  color: white;
+  background-color: var(--color-primary-base);
+}
+
+.fwalert-buttons .fwalert-btn {
+  color: white;
+}
+
+.fwalert-buttons .fwalert-btn:hover {
+  background-color: var(--color-primary-soft);
+}

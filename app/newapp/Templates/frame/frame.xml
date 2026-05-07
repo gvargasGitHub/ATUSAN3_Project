@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Root>
-  <NavBar name="topbar">
+  <Navbar name="topbar">
     <Left>
     </Left>
     <Right>
@@ -8,5 +8,5 @@
       <MenuItem name="mi_close" text="Cerrar" icon="fa fa-sign-out" />
       <MenuItem name="mi_account" icon="fa fa-user" />
     </Right>
-  </NavBar>
+  </Navbar>
 </Root>
