@@ -1,8 +1,13 @@
 {
     "name": "gvargas/atusan-project",
     "type": "project",
+    "repositories": [
+        {
+        "type": "vcs",
+        "url": "https://github.com/gvargasGitHub/ATUSAN3_Core"
+        }
+    ],
     "require": {
         "gvargas/atusan-core":"^3.0"
-    },
-    "minimum-stability": "stable"
+    }
 }
