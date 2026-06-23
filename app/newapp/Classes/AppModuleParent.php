@@ -3,14 +3,14 @@
 namespace App\Classes;
 
 use Atusan\Controller\Module;
-use Atusan\Session\AppSession;
+use Atusan\Session\Session;
 
 abstract class AppModuleParent extends Module
 {
   function index()
   {
-    $this->topbar->setTitle($this->app->title);
-    $this->topbar->editItem('mi_account', 'text', AppSession::get('nombreUsuario'));
-    $this->topbar->editItem('mi_version', 'text', 'Versión: ' . AppSession::get('version'));
+    $this->topbar->setTitle($_ENV['APP_TITLE']);
+    $this->topbar->mi_account->setText(Session::get('nombreUsuario'));
+    $this->topbar->setText('mi_version', 'Versión: ' . Session::get('version'));
   }
 }

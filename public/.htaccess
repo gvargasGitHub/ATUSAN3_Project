@@ -15,5 +15,5 @@ RewriteCond %{REQUEST_FILENAME} !-d
 
 # Entonces redirige TODAS las peticiones a index.php,
 # preservando los parámetros (?a=b) y finalizando el proceso.
-RewriteRule ^ index.php/$1 [QSA,L]      
+RewriteRule ^(.*)$ index.php?uri=$1 [QSA,L]
 # QSA = mantiene query string; L = última regla

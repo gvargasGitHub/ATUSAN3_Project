@@ -2,37 +2,25 @@
 
 namespace App\Services;
 
-use App\Models\AppModel;
 use Atusan\Controller\Service;
-use Atusan\Session\AppSession;
+use Atusan\Session\Session;
 
 class AppServices extends Service
 {
   function index()
   {
-    $this->json();
+    $this->response->json();
   }
 
   function close()
   {
-    AppSession::close();
+    Session::close();
 
     $this->response->json();
   }
 
   function keepAlive()
   {
-    AppSession::keepAlive();
-
-    $model = new AppModel();
-
-    $this->response->json($model->callLogout());
-  }
-
-  function checkLogoutState()
-  {
-    $model = new AppModel();
-
-    $this->response->json($model->callLogout());
+    Session::keepAlive();
   }
 }
