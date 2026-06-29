@@ -2,17 +2,15 @@
 
 namespace App;
 
-use App\Modules\modAcceso;
-use App\Services\AppServices;
 use Atusan\Route\Route;
 
-Route::get('/', modAcceso::class);
-Route::get('/login', modAcceso::class);
+Route::get('/', Modules\modAcceso::class);
+Route::get('login', Modules\modAcceso::class);
 
-Route::ajax('/login', modAcceso::class, 'login');
+Route::ajax('login', Modules\modAcceso::class, 'login');
 
 Route::middleware('auth', function () {
   // Servicios
-  Route::ajax('/keepAlive', AppServices::class, 'keepAlive');
-  Route::ajax('/close', AppServices::class, 'close');
+  Route::ajax('keepAlive', Services\KeepAliveSessionService::class, 'keepAlive');
+  Route::ajax('close', Services\CloseSessionService::class, 'close');
 }, '/login');
