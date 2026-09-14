@@ -4,13 +4,13 @@ namespace App;
 
 use Atusan\Route\Route;
 
-Route::get('/', Modules\modAcceso::class);
-Route::get('login', Modules\modAcceso::class);
-
-Route::ajax('login', Modules\modAcceso::class, 'login');
+Route::get('/', Modules\Home::class);
 
 Route::middleware('auth', function () {
   // Servicios
-  Route::ajax('keepAlive', Services\KeepAliveSessionService::class, 'keepAlive');
-  Route::ajax('close', Services\CloseSessionService::class, 'close');
-}, '/login');
+  Route::ajax('keepAlive', Services\SessionKeepAlive::class, 'keepAlive');
+  Route::ajax('close', Services\SessionClose::class, 'close');
+}, '/');
+
+// Backend API Health Check
+Route::get('health', \App\Services\Health::class);

@@ -5,11 +5,11 @@ namespace App\Services;
 use Atusan\Controller\Service;
 use Atusan\Session\Session;
 
-class KeepAliveSessionService extends Service
+class SessionClose extends Service
 {
   function index()
   {
-    Session::keepAlive();
+    Session::close();
 
     $this->response->json();
   }

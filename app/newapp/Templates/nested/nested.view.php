@@ -1,1 +1,1 @@
-<?= self::$module->write() ?>
+<?php self::$module->write() ?>

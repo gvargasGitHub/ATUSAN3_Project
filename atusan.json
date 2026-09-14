@@ -1,0 +1,43 @@
+{
+  "$schema": "./schemas/atusan-3.schema.json",
+  "framework": {
+    "name": "ATUSAN",
+    "version": "3",
+    "php": ">=8.2",
+    "architecture": "mvc-modular"
+  },
+  "project": {
+    "name": "mi-proyecto",
+    "environment": "development"
+  },
+  "paths": {
+    "public": "public",
+    "entrypoint": "public/index.php",
+    "applications": "app",
+    "logs": "logs",
+    "vendor": "vendor"
+  },
+  "applications": {
+    "active": "newapp",
+    "items": {
+      "newapp": {
+        "namespace": "App",
+        "directory": "app/newapp",
+        "routing": "Route.php"
+      }
+    }
+  },
+  "frontend": {
+    "languages": [
+      "HTML",
+      "CSS",
+      "JavaScript"
+    ],
+    "framework": null,
+    "buildTool": null
+  },
+  "agents": {
+    "instructions": "AGENTS.md",
+    "stack": "STACK.md"
+  }
+}

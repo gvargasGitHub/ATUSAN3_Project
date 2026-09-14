@@ -1,4 +1,9 @@
-<?= self::$module->topbar->write() ?>
+<?php
+/** @var \Atusan\Controller\Module $module */
+
+$topbar = self::$module->findViewById('topbar');
+?>
+<?php $topbar->write() ?>
 <content>
-  <?= self::$module->write() ?>
+  <?php self::$module->write() ?>
 </content>
