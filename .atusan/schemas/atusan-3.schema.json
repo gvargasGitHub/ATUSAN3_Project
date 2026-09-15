@@ -1,0 +1,275 @@
+{
+"$schema": "https://json-schema.org/draft/2020-12/schema",
+"$id": "https://schemas.atusan.dev/atusan-3.schema.json",
+
+"title": "ATUSAN 3 Project Manifest",
+"description": "Schema oficial para validar archivos atusan.json de proyectos ATUSAN 3.",
+
+"type": "object",
+"additionalProperties": false,
+
+"required": [
+"framework",
+"project",
+"paths",
+"applications"
+],
+
+"properties": {
+"$schema": {
+"type": "string",
+"description": "URI o ruta relativa del JSON Schema utilizado para validar este manifiesto."
+},
+"framework": {
+  "$ref": "#/$defs/framework"
+},
+
+"project": {
+  "$ref": "#/$defs/project"
+},
+
+"paths": {
+  "$ref": "#/$defs/globalPaths"
+},
+
+"applications": {
+  "$ref": "#/$defs/applications"
+},
+
+"frontend": {
+  "$ref": "#/$defs/frontend"
+},
+
+"agents": {
+  "$ref": "#/$defs/agents"
+}
+},
+
+"$defs": {
+"framework": {
+"type": "object",
+"additionalProperties": false,
+  "required": [
+    "name",
+    "version",
+    "php",
+    "architecture"
+  ],
+
+  "properties": {
+    "name": {
+      "type": "string",
+      "const": "ATUSAN",
+      "description": "Nombre oficial del framework."
+    },
+
+    "version": {
+      "type": "string",
+      "pattern": "^3(?:\\.\\d+){0,2}$",
+      "description": "Versión de ATUSAN 3."
+    },
+
+    "php": {
+      "type": "string",
+      "const": ">=8.2",
+      "description": "Versión mínima oficial de PHP soportada por ATUSAN 3."
+    },
+
+    "architecture": {
+      "type": "string",
+      "const": "mvc-modular",
+      "description": "Arquitectura oficial utilizada por ATUSAN 3."
+    }
+  }
+},
+
+"project": {
+  "type": "object",
+  "additionalProperties": false,
+
+  "required": [
+    "name",
+    "environment"
+  ],
+
+  "properties": {
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Nombre del proyecto."
+    },
+
+    "environment": {
+      "type": "string",
+      "enum": [
+        "development",
+        "testing",
+        "staging",
+        "production"
+      ],
+      "description": "Entorno principal del proyecto."
+    }
+  }
+},
+
+"globalPaths": {
+  "type": "object",
+  "additionalProperties": false,
+
+  "required": [
+    "public",
+    "entrypoint",
+    "applications",
+    "vendor"
+  ],
+
+  "properties": {
+    "public": {
+      "$ref": "#/$defs/path"
+    },
+
+    "entrypoint": {
+      "$ref": "#/$defs/path"
+    },
+
+    "applications": {
+      "$ref": "#/$defs/path"
+    },
+
+    "logs": {
+      "$ref": "#/$defs/path"
+    },
+
+    "vendor": {
+      "$ref": "#/$defs/path"
+    }
+  }
+},
+
+"applications": {
+  "type": "object",
+  "additionalProperties": false,
+
+  "required": [
+    "active",
+    "items"
+  ],
+
+  "properties": {
+    "active": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Nombre de la aplicación activa del proyecto."
+    },
+
+    "items": {
+      "type": "object",
+      "minProperties": 1,
+      "description": "Aplicaciones registradas en el proyecto.",
+
+      "additionalProperties": {
+        "$ref": "#/$defs/applicationItem"
+      }
+    }
+  }
+},
+
+"applicationItem": {
+  "type": "object",
+  "additionalProperties": false,
+
+  "required": [
+    "namespace",
+    "directory",
+    "routing"
+  ],
+
+  "properties": {
+    "namespace": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Namespace raíz utilizado por la aplicación."
+    },
+
+    "directory": {
+      "$ref": "#/$defs/path"
+    },
+
+    "routing": {
+      "$ref": "#/$defs/path"
+    }
+  }
+},
+
+"frontend": {
+  "type": "object",
+  "additionalProperties": false,
+
+  "properties": {
+    "languages": {
+      "type": "array",
+      "uniqueItems": true,
+
+      "items": {
+        "type": "string",
+        "enum": [
+          "HTML",
+          "CSS",
+          "JavaScript"
+        ]
+      },
+
+      "default": [
+        "HTML",
+        "CSS",
+        "JavaScript"
+      ],
+
+      "description": "Lenguajes frontend utilizados por el proyecto."
+    },
+
+    "framework": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Framework frontend utilizado por el proyecto, si existe."
+    },
+
+    "buildTool": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Herramienta de build frontend, si existe."
+    }
+  }
+},
+
+"agents": {
+  "type": "object",
+  "additionalProperties": false,
+
+  "properties": {
+    "instructions": {
+      "type": "string",
+      "default": "AGENTS.md",
+      "description": "Archivo principal de instrucciones para agentes IA."
+    },
+
+    "stack": {
+      "type": "string",
+      "default": "STACK.md",
+      "description": "Archivo que define las decisiones tecnológicas del proyecto."
+    }
+  }
+},
+
+"path": {
+  "type": "string",
+  "minLength": 1,
+  "pattern": "^(?![A-Za-z]:[\\\\/])(?!/).+",
+  "description": "Ruta relativa al directorio raíz del proyecto."
+}
+}
+}
