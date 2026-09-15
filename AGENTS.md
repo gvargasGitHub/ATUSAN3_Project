@@ -43,16 +43,16 @@ Cuando ATUSAN proporcione una solución para una operación, utiliza primero la 
 Antes de generar código, utiliza las siguientes fuentes de información en este orden:
 
 1. Este archivo `AGENTS.md`.
-2. `STACK.md`, cuando exista.
-3. `atusan.json`, cuando exista.
+2. `.atusan/STACK.md`, cuando exista.
+3. `.atusan/atusan.json`, cuando exista.
 4. Código existente de la aplicación.
 5. `composer.json`.
 6. API pública de ATUSAN 3.
 7. Convenciones existentes del módulo relacionado.
 
-`STACK.md` contiene las decisiones tecnológicas particulares del proyecto.
+`.atusan/STACK.md` contiene las decisiones tecnológicas particulares del proyecto.
 
-`atusan.json` contiene metadatos estructurados de la instalación ATUSAN.
+`.atusan/atusan.json` contiene metadatos estructurados de la instalación ATUSAN.
 
 No sustituyas decisiones expresamente definidas en estos archivos por preferencias genéricas.
 
@@ -126,8 +126,8 @@ project/
 ├── composer.json
 ├── composer.lock
 ├── AGENTS.md
-├── STACK.md
-└── atusan.json
+├── .atusan/STACK.md
+└── .atusan/atusan.json
 ```
 
 La estructura exacta debe verificarse en el proyecto antes de crear archivos.
@@ -231,7 +231,7 @@ Un proyecto ATUSAN puede contener múltiples aplicaciones.
 
 Sin embargo, el modelo estándar es **una aplicación principal por proyecto**.
 
-La aplicación activa está definida por la configuración del proyecto y debe coincidir con la aplicación seleccionada en `atusan.json`.
+La aplicación activa está definida por la configuración del proyecto y debe coincidir con la aplicación seleccionada en `.atusan/atusan.json`.
 
 Al generar o modificar código:
 
@@ -717,7 +717,7 @@ extend()
 
 El módulo administra además sus componentes, manifiesto XML, template y vista.
 
-No sustituyas este mecanismo por un motor de vistas externo salvo que `STACK.md` lo establezca expresamente.
+No sustituyas este mecanismo por un motor de vistas externo salvo que `.atusan/STACK.md` lo establezca expresamente.
 
 ---
 
@@ -1376,7 +1376,7 @@ jQuery
 TypeScript
 ```
 
-La existencia o incorporación de estas tecnologías debe estar definida en `STACK.md` o en el código existente.
+La existencia o incorporación de estas tecnologías debe estar definida en `.atusan/STACK.md` o en el código existente.
 
 Si un proyecto ya utiliza una librería, conserva su convención mientras no exista una solicitud de migración.
 
@@ -1620,7 +1620,7 @@ Este comando debe:
 * renombrar `newapp`;
 * configurar la nueva aplicación;
 * establecerla como aplicación activa;
-* mantener sincronizado `atusan.json` cuando este archivo exista.
+* mantener sincronizado `.atusan/atusan.json` cuando este archivo exista.
 
 Después de publicar, `newapp` no debe permanecer como aplicación activa.
 
@@ -1759,7 +1759,7 @@ Antes de agregar un paquete Composer verifica si:
 * ATUSAN ya proporciona la funcionalidad;
 * PHP proporciona la funcionalidad de forma nativa;
 * el proyecto ya tiene una solución equivalente;
-* `STACK.md` autoriza o define la dependencia.
+* `.atusan/STACK.md` autoriza o define la dependencia.
 
 No agregues una dependencia únicamente porque sea habitual en otros proyectos.
 
@@ -1831,8 +1831,8 @@ JavaScript
 HTML
 repositorio Git
 AGENTS.md
-STACK.md
-atusan.json
+.atusan/STACK.md
+.atusan/atusan.json
 ```
 
 ---
@@ -1843,8 +1843,8 @@ Antes de implementar una tarea, el agente debe seguir esta secuencia:
 
 1. Identificar la aplicación activa.
 2. Identificar el módulo o servicio involucrado.
-3. Leer `STACK.md` si existe.
-4. Leer `atusan.json` si existe.
+3. Leer `.atusan/STACK.md` si existe.
+4. Leer `.atusan/atusan.json` si existe.
 5. Revisar `Route.php`.
 6. Revisar controlador, modelo, servicio, vista o componente relacionado.
 7. Identificar las APIs existentes de ATUSAN que resuelven la necesidad.
@@ -1922,7 +1922,7 @@ Evita variables globales nuevas cuando no sean necesarias.
 
 Mantén compatibilidad con la arquitectura JavaScript existente de ATUSAN y del módulo.
 
-No agregues herramientas de build, npm o frameworks frontend si `STACK.md` no los requiere.
+No agregues herramientas de build, npm o frameworks frontend si `.atusan/STACK.md` no los requiere.
 
 ---
 
@@ -1975,7 +1975,7 @@ JWT es obligatorio para Bearer
 un proyecto requiere múltiples aplicaciones
 ```
 
-Comprueba primero el proyecto, la aplicación activa y `STACK.md`.
+Comprueba primero el proyecto, la aplicación activa y `.atusan/STACK.md`.
 
 ---
 
@@ -2012,9 +2012,9 @@ Cuando una capacidad no exista, implementa la solución más simple compatible c
 
 ---
 
-# 74. STACK.md
+# 74. .atusan/STACK.md
 
-`STACK.md` define las decisiones tecnológicas particulares de cada proyecto.
+`.atusan/STACK.md` define las decisiones tecnológicas particulares de cada proyecto.
 
 Puede especificar, entre otros:
 
@@ -2032,13 +2032,13 @@ convenciones específicas
 
 No modifiques automáticamente el stack.
 
-Si `STACK.md` indica una tecnología concreta, utilízala mientras sea compatible con ATUSAN 3.
+Si `.atusan/STACK.md` indica una tecnología concreta, utilízala mientras sea compatible con ATUSAN 3.
 
 ---
 
-# 75. atusan.json
+# 75. .atusan/atusan.json
 
-`atusan.json` describe el proyecto ATUSAN actual.
+`.atusan/atusan.json` describe el proyecto ATUSAN actual.
 
 Debe utilizarse para conocer información como:
 
@@ -2094,7 +2094,7 @@ En el caso normal debe existir una sola aplicación funcional.
 
 # 76. Sincronización de aplicaciones
 
-La aplicación activa definida en la configuración del proyecto y en `atusan.json` debe permanecer sincronizada.
+La aplicación activa definida en la configuración del proyecto y en `.atusan/atusan.json` debe permanecer sincronizada.
 
 Después de ejecutar:
 
@@ -2135,7 +2135,7 @@ Si la respuesta es sí, utiliza ATUSAN.
 
 Si la respuesta es no, utiliza primero las capacidades nativas de PHP, JavaScript, HTML o CSS.
 
-Introduce una dependencia externa únicamente cuando exista una necesidad concreta y sea compatible con `STACK.md`.
+Introduce una dependencia externa únicamente cuando exista una necesidad concreta y sea compatible con `.atusan/STACK.md`.
 
 ---
 
