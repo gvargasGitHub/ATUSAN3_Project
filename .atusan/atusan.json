@@ -37,7 +37,7 @@
     "buildTool": null
   },
   "agents": {
-    "instructions": "AGENTS.md",
+    "instructions": "../AGENTS.md",
     "stack": "STACK.md"
   }
 }
