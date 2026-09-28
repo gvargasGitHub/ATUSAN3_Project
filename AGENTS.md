@@ -47,12 +47,20 @@ Antes de generar código, utiliza las siguientes fuentes de información en este
 3. `.atusan/atusan.json`, cuando exista.
 4. Código existente de la aplicación.
 5. `composer.json`.
-6. API pública de ATUSAN 3.
-7. Convenciones existentes del módulo relacionado.
+6. `.env`.
+7. Route.php de la aplicación activa.
+8. API pública de ATUSAN 3.
+9. Convenciones existentes del módulo relacionado.
 
 `.atusan/STACK.md` contiene las decisiones tecnológicas particulares del proyecto.
 
 `.atusan/atusan.json` contiene metadatos estructurados de la instalación ATUSAN.
+
+`composer.json` define dependencias, versión de PHP, autoload y paquetes instalados.
+
+`.env` contiene la configuración del entorno y define la aplicación activa mediante APP_NAME.
+
+La estructura real del proyecto y el código existente tienen prioridad sobre supuestos o convenciones genéricas.
 
 No sustituyas decisiones expresamente definidas en estos archivos por preferencias genéricas.
 
@@ -231,7 +239,8 @@ Un proyecto ATUSAN puede contener múltiples aplicaciones.
 
 Sin embargo, el modelo estándar es **una aplicación principal por proyecto**.
 
-La aplicación activa está definida por la configuración del proyecto y debe coincidir con la aplicación seleccionada en `.atusan/atusan.json`.
+La aplicación activa está definida por la configuración del proyecto,
+principalmente mediante APP_NAME en el archivo .env.
 
 Al generar o modificar código:
 
