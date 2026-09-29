@@ -455,7 +455,6 @@ DataForm
 DataGrid
 DataMultiForm
 DataTree
-HTML
 Modal
 Navbar
 Panel
@@ -470,14 +469,6 @@ No reemplazar componentes existentes sin necesidad.
 ---
 
 # 18. Templates y vistas
-
-Los módulos deben utilizar el sistema de templates de ATUSAN.
-
-Clase principal:
-
-```text
-Atusan\Template\Template
-```
 
 Las vistas pueden contener:
 
