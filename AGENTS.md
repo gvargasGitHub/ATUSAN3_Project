@@ -117,10 +117,8 @@ project/
 │       ├── Modules/
 │       ├── Models/
 │       ├── Services/
-│       ├── Classes/
-│       ├── Components/
+│       ├── Controllers/
 │       ├── Templates/
-│       ├── Views/
 │       ├── Config/
 │       ├── Route.php
 │       └── .env
@@ -164,8 +162,6 @@ El flujo general es:
 public/index.php
       ↓
 Bootstrap::app()
-      ↓
-Kernel::handle()
       ↓
 Request::capture()
       ↓
@@ -225,7 +221,6 @@ o sus subnamespaces:
 App\Modules
 App\Models
 App\Services
-App\Classes
 App\Config
 ```
 
@@ -296,20 +291,7 @@ Atusan\Kernel\Kernel
 Sus operaciones principales son:
 
 ```php
-Kernel::handle();
 Kernel::execute($request);
-```
-
-`handle()` carga las rutas mediante:
-
-```php
-Route::implement();
-```
-
-y captura la petición:
-
-```php
-Request::capture();
 ```
 
 `execute()` ejecuta primero:
@@ -321,10 +303,10 @@ SecurityMiddleware::handle($request);
 y posteriormente resuelve la ruta:
 
 ```php
-[$controller, $routeType] = Route::resolve();
+[$routeType, $httpURI] = Route::resolve();
 ```
 
-Finalmente invoca el método del controlador pasando los parámetros definidos en la URI.
+Finalmente crea el controlador e invoca el método del controlador pasando los parámetros definidos en la URI.
 
 No implementes un segundo dispatcher o kernel para funcionalidades normales de la aplicación.
 
@@ -521,18 +503,19 @@ No crees sistemas alternativos de Response sin necesidad.
 
 La API principal incluye:
 
-| Método                         | Propósito                      |
-| ------------------------------ | ------------------------------ |
-| `Response::instance()`         | Obtener instancia singleton    |
-| `Response::status($code)`      | Establecer código HTTP         |
-| `view($module)`                | Renderizar un módulo           |
-| `add($key, $value)`            | Agregar datos a respuesta JSON |
-| `message($message)`            | Establecer mensaje             |
-| `json($data)`                  | Generar respuesta JSON         |
-| `exception($message, $detail)` | Generar respuesta de excepción |
-| `notice($message)`             | Generar aviso                  |
-| `warning($message)`            | Generar advertencia            |
-| `unknow($message, $detail)`    | Manejar error desconocido      |
+| Método                         | Propósito                           |
+| ------------------------------ | ----------------------------------- |
+| `Response::instance()`         | Obtener instancia singleton         |
+| `Response::status($code)`      | Establecer código HTTP              |
+| `view($module)`                | Renderizar un módulo                |
+| `html($module)`                | Alias de view                       |
+| `add($key, $value)`            | Agregar datos a respuesta JSON      |
+| `addNotice($message)`          | Agregar un aviso en el board        |
+| `addWarning($message)`         | Agregar una advertencia en el board |
+| `message($message)`            | Establecer mensaje                  |
+| `json($data)`                  | Generar respuesta JSON              |
+| `notice($message)`             | Generar aviso en formato JSON       |
+| `warning($message)`            | Generar advertencia en formato JSON |
 
 ---
 
@@ -639,6 +622,12 @@ o:
 X-Requested-With: XMLHttpRequest
 ```
 
+o:
+
+```http
+Content-Type: application/json
+```
+
 Esta información es utilizada principalmente por `Response` para determinar cómo representar errores, warnings y notices.
 
 No dependas exclusivamente del hecho de utilizar una ruta `Route::ajax()` para determinar el formato de respuesta.
@@ -700,7 +689,7 @@ Una implementación típica es:
 ```php
 namespace App\Modules;
 
-class modExample extends AppModuleParent
+class modExample extends \Atusan\Controller\Module
 {
     public function index()
     {
@@ -1245,7 +1234,7 @@ y:
 
 ```php
 ModelBase::connect();
-ModelBase::model();
+ModelBase::getNew();
 ```
 
 No abras conexiones nuevas para cada operación si el modelo ya dispone de `$this->conn`.
@@ -1474,17 +1463,17 @@ No reemplaces el sistema CSS existente por otro framework salvo requerimiento ex
 
 ---
 
-# 50. Templates
+# 50. Renders
 
 ATUSAN dispone de:
 
 ```php
-Atusan\Template\Template
+Atusan\Http\Response\TraitRender
 ```
 
 Los módulos utilizan este sistema para renderizar su contenido.
 
-`Response::view()` delega en `Template::render()`.
+`Response::view()` delega en `Render::renderView()`.
 
 No invoques manualmente `include` o `require` para construir una vista cuando el flujo normal del módulo y `Response::view()` sea suficiente.
 
