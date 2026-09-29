@@ -1,3 +1,6 @@
+<?php
+/** @var \Atusan\Controller\Module $module */
+?>
 <content>
-  <?php self::$module->write() ?>
+  <?php $module->write() ?>
 </content>

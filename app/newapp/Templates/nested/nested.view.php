@@ -1,1 +1,4 @@
-<?php self::$module->write() ?>
+<?php 
+/** @var \Atusan\Controller\Module $module */
+
+$module->write();
