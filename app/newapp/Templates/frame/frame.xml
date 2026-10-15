@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Root>
-  <Navbar name="topbar">
+  <Navbar id="topbar">
     <Left>
     </Left>
     <Right>
-      <MenuItem name="mi_version" text="Versión:" />
-      <MenuItem name="mi_close" text="Cerrar" icon="fa fa-sign-out" />
-      <MenuItem name="mi_account" icon="fa fa-user" />
+      <MenuItem id="mi_version" text="Versión:" />
+      <MenuItem id="mi_close" text="Cerrar" icon="fa fa-sign-out" />
+      <MenuItem id="mi_account" icon="fa fa-user" />
     </Right>
   </Navbar>
 </Root>
