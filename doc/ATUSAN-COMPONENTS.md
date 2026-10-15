@@ -807,8 +807,8 @@ Ejemplo:
 
 ```javascript
 sidebar.onMenuItemClick = function(ar) {
-    if (ar.name === 'mi_index') {
-        ats.openModule('/');
+    if (ar.id === 'mi_index') {
+        Atusan.openModule('/');
     }
 };
 ```
@@ -868,8 +868,8 @@ Ejemplo:
 
 ```javascript
 navbar.onMenuItemClick = function(ar) {
-    if (ar.name === 'mi_index') {
-        ats.openModule('/');
+    if (ar.id === 'mi_index') {
+        Atusan.openModule('/');
     }
 };
 ```

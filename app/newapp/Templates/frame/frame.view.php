@@ -9,10 +9,10 @@ $topbar->write() ?>
 </content>
 <script>
 topbar.onMenuItemClick = function (item) {
-  if (item.name == "mi_close") {
-    if (confirm('¿Cerrar?')) ats.send('/close', { done: rs => ats.openModule('/') });
+  if (item.id == "mi_close") {
+    if (confirm('¿Cerrar?')) Atusan.send('/close', { done: rs => Atusan.openModule('/') });
   } else {
-    ats.openModule(item.route);
+    Atusan.openModule(item.route);
   }
 };
 </script>
