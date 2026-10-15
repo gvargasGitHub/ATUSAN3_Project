@@ -43,18 +43,18 @@ Cuando ATUSAN proporcione una solución para una operación, utiliza primero la 
 Antes de generar código, utiliza las siguientes fuentes de información en este orden:
 
 1. Este archivo `AGENTS.md`.
-2. `.atusan/STACK.md`, cuando exista.
-3. `.atusan/atusan.json`, cuando exista.
+2. `STACK.md`, cuando exista.
+3. `doc/ATUSAN-COMPONENTS.md`, cuando la tarea involucre Components, Controls o UI generada por ATUSAN.
 4. Código existente de la aplicación.
 5. `composer.json`.
 6. `.env`.
-7. Route.php de la aplicación activa.
+7. `Route.php` de la aplicación activa.
 8. API pública de ATUSAN 3.
 9. Convenciones existentes del módulo relacionado.
 
-`.atusan/STACK.md` contiene las decisiones tecnológicas particulares del proyecto.
+`STACK.md` contiene las decisiones tecnológicas particulares del proyecto.
 
-`.atusan/atusan.json` contiene metadatos estructurados de la instalación ATUSAN.
+`doc/ATUSAN-COMPONENTS.md` contiene la referencia práctica para declarar, obtener, renderizar y utilizar Components de ATUSAN desde PHP y JavaScript.
 
 `composer.json` define dependencias, versión de PHP, autoload y paquetes instalados.
 
@@ -125,6 +125,10 @@ project/
 │
 ├── public/
 │   ├── index.php
+│   └── NombreAplicacion/
+│       ├── css/
+│       ├── img/
+│       ├── js/
 │   └── ...
 │
 ├── vendor/
@@ -132,8 +136,7 @@ project/
 ├── composer.json
 ├── composer.lock
 ├── AGENTS.md
-├── .atusan/STACK.md
-└── .atusan/atusan.json
+├── STACK.md
 ```
 
 La estructura exacta debe verificarse en el proyecto antes de crear archivos.
@@ -715,7 +718,7 @@ extend()
 
 El módulo administra además sus componentes, manifiesto XML, template y vista.
 
-No sustituyas este mecanismo por un motor de vistas externo salvo que `.atusan/STACK.md` lo establezca expresamente.
+No sustituyas este mecanismo por un motor de vistas externo salvo que `STACK.md` lo establezca expresamente.
 
 ---
 
@@ -756,7 +759,7 @@ Las vistas pueden contener HTML, CSS y JavaScript.
 Una vista ATUSAN puede utilizar propiedades del módulo:
 
 ```php
-<h3><?= $this->title ?></h3>
+<h3><?= $this->get('title') ?></h3>
 ```
 
 Respeta las convenciones existentes de cada aplicación.
@@ -854,7 +857,6 @@ ATUSAN soporta:
 ```php
 Route::get()
 Route::post()
-Route::ajax()
 Route::nested()
 Route::put()
 Route::patch()
@@ -921,27 +923,7 @@ Utilízalo para peticiones HTTP POST normales.
 
 # 30. Route::ajax()
 
-Ejemplo:
-
-```php
-Route::ajax(
-    '/customers/save',
-    CustomerService::class,
-    'save'
-);
-```
-
-`Route::ajax()` registra internamente una ruta:
-
-```text
-POST
-```
-
-El nombre `ajax` expresa la intención de uso de la ruta, pero no constituye un método HTTP diferente.
-
-No asumas que `Route::ajax()` genera automáticamente JSON.
-
-El controlador sigue siendo responsable de utilizar `Response`.
+Retirado de ATUSAN.
 
 ---
 
@@ -1038,7 +1020,7 @@ Route::middleware('auth', function () {
         CustomerModule::class
     );
 
-    Route::ajax(
+    Route::post(
         '/customers/save',
         CustomerService::class,
         'save'
@@ -1299,6 +1281,8 @@ como valor predeterminado cuando no se especifica.
 | `query($sql, $params)`   | Ejecutar consulta y obtener resultado |
 | `execute($sql, $params)` | Ejecutar operación                    |
 | `routine(...)`           | Ejecutar rutina/procedimiento         |
+| `procedureOuts(...)`     | Ejecutar rutina/procedimiento         |
+| `procedureResult(...)`   | Ejecutar rutina/procedimiento         |
 | `autocommit($mode)`      | Configurar autocommit                 |
 | `commit()`               | Confirmar transacción                 |
 | `rollback()`             | Revertir transacción                  |
@@ -1374,7 +1358,7 @@ jQuery
 TypeScript
 ```
 
-La existencia o incorporación de estas tecnologías debe estar definida en `.atusan/STACK.md` o en el código existente.
+La existencia o incorporación de estas tecnologías debe estar definida en `STACK.md` o en el código existente.
 
 Si un proyecto ya utiliza una librería, conserva su convención mientras no exista una solicitud de migración.
 
@@ -1479,36 +1463,284 @@ No invoques manualmente `include` o `require` para construir una vista cuando el
 
 ---
 
-# 51. Componentes
+# 51. Components
 
-ATUSAN dispone de componentes propios bajo:
+ATUSAN dispone de Components reutilizables bajo:
 
 ```php
 Atusan\Components
 ```
 
-Entre las clases existentes pueden encontrarse componentes como:
+Los Components forman parte de la arquitectura oficial de UI de ATUSAN. Antes de construir manualmente una interfaz equivalente con HTML o JavaScript, verifica si existe un Component que cubra la necesidad.
+
+Los Components principales incluyen:
 
 ```text
 DataForm
 DataGrid
-DataMultiForm
 DataTree
-HTML
+DataMultiForm
 Modal
 Navbar
-Panel
 Sidebar
 Subnavbar
+Panel
 TabGroup
-ButtonGroup
+TabGroupContent
 ```
 
-Antes de implementar manualmente una funcionalidad visual equivalente, revisa si ATUSAN ya dispone del componente.
+Para ejemplos completos y API práctica consulta `doc/ATUSAN-COMPONENTS.md`.
 
-No inventes propiedades o métodos de un componente.
+## 51.1 Flujo de un Component
 
-Revisa primero su implementación real.
+El flujo normal es:
+
+```text
+Components.xml
+      ↓
+Module
+      ↓
+findComponentById()
+      ↓
+Component PHP
+      ↓
+View
+      ↓
+$component->write()
+      ↓
+HTML + instancia JavaScript
+```
+
+Cada Component puede tener:
+
+- atributos XML específicos;
+- Controls propios;
+- métodos PHP específicos;
+- una plantilla HTML fija;
+- una clase JavaScript asociada;
+- eventos y métodos JavaScript;
+- estilos CSS estándar de ATUSAN.
+
+No inventes atributos, Controls, métodos PHP ni métodos JavaScript. Revisa `doc/ATUSAN-COMPONENTS.md`, los ejemplos existentes y la implementación real.
+
+## 51.2 Declaración en Components.xml
+
+Los Components utilizados por un Module se declaran en su archivo `Components.xml`.
+
+Ejemplo:
+
+```xml
+<DataForm id="form1" route="customers/save">
+  <ControlText id="name" label="Nombre:" />
+  <ControlSelect id="type" label="Tipo:" />
+</DataForm>
+```
+
+Los Controls válidos dependen del Component. Por ejemplo, `DataForm` puede contener Controls de entrada y `DataGrid` define Controls que representan las columnas de cada fila.
+
+No construyas un Component desde PHP si la convención del Module es declararlo en `Components.xml`.
+
+## 51.3 Obtención desde el Module
+
+Los Components declarados son integrados al Module dentro de su colección de componentes.
+
+Para obtener una instancia utiliza:
+
+```php
+$this->findComponentById('componentId');
+```
+
+`findComponentById()` realiza una búsqueda recursiva de Components y retorna la instancia correspondiente o `null`.
+
+Ejemplo:
+
+```php
+use Atusan\Components\DataGrid;
+
+protected DataGrid $grid;
+
+protected function initializeComponents(): void
+{
+    $this->grid = $this->findComponentById('grid');
+}
+```
+
+La búsqueda recursiva permite obtener también Components contenidos dentro de otros Components. Cuando ya dispones del Component padre también puedes buscar desde él si su API lo permite:
+
+```php
+$this->tab = $this->findComponentById('tab');
+$this->grid = $this->tab->findComponentById('grid');
+```
+
+No recorras manualmente la colección interna de Components cuando `findComponentById()` resuelva la necesidad.
+
+## 51.4 Configuración desde PHP
+
+Después de obtener el Component, utiliza los métodos específicos de su clase.
+
+Ejemplos reales:
+
+```php
+$this->form->setCsrf($csrf);
+$this->form->feedList('type', $options);
+$this->form->import($data);
+
+$this->grid->import($rows);
+
+$this->navbar->setTitle('Administración');
+$this->navbar->setText('mi_account', 'Usuario');
+$this->navbar->setIcon('mi_account', 'fa fa-user');
+```
+
+No asumas que un método disponible en un Component existe en otro.
+
+## 51.5 Renderizado en la View
+
+Cada Component genera su propia estructura HTML mediante una plantilla interna.
+
+Para integrarlo en la View utiliza `write()` sobre la instancia:
+
+```php
+<?= $this->grid->write() ?>
+```
+
+No reproduzcas manualmente en la View el HTML interno del Component.
+
+Los métodos `make()`, `write()` y `build()` tienen propósitos relacionados con generación de contenido, pero su disponibilidad y comportamiento deben verificarse en la clase concreta.
+
+## 51.6 Instancia JavaScript
+
+La plantilla PHP del Component genera una instancia JavaScript global cuyo nombre corresponde al `id` declarado en `Components.xml`.
+
+Por ejemplo:
+
+```xml
+<DataGrid id="grid1">
+```
+
+genera una instancia equivalente a:
+
+```javascript
+var grid1 = new DataGrid('grid1', 'NombreModulo');
+```
+
+Por tanto, la View puede utilizar directamente:
+
+```javascript
+grid1.onClick = function(ar) {
+    this.selectRow(ar.row);
+};
+```
+
+No crees manualmente una segunda instancia JavaScript del mismo Component.
+
+## 51.7 API JavaScript de ATUSAN
+
+La funcionalidad cliente de los Components está implementada principalmente en la librería JavaScript de ATUSAN.
+
+Antes de manipular directamente el DOM interno de un Component:
+
+1. revisa la clase JavaScript correspondiente;
+2. utiliza sus métodos públicos;
+3. utiliza sus callbacks y eventos;
+4. manipula el DOM directamente solo cuando la API no cubra la necesidad.
+
+Ejemplos:
+
+```javascript
+form1.getItem('name');
+form1.setItem('name', 'Juan');
+grid1.selectRow(ar.row);
+md1.openModal();
+panel.openModule('/route');
+mainTab.openModule('/route');
+```
+
+## 51.8 Eventos del lado cliente
+
+Los Components pueden exponer callbacks sobrescribibles desde la View.
+
+Ejemplos:
+
+```javascript
+form1.onChange = function(ar) {
+    console.log(ar);
+};
+
+grid1.onClick = function(ar) {
+    this.selectRow(ar.row);
+};
+
+sidebar.onMenuItemClick = function(ar) {
+    console.log(ar);
+};
+
+tab1.onChange = function(ar) {
+    console.log(ar);
+};
+```
+
+Prefiere los eventos oficiales del Component sobre listeners DOM alternativos.
+
+## 51.9 Componentes anidados
+
+Un Component puede contener otros Components.
+
+Ejemplo:
+
+```xml
+<TabGroup id="tab1">
+  <TabGroupContent id="page1" text="Clientes">
+    <DataGrid id="grid1">
+      ...
+    </DataGrid>
+  </TabGroupContent>
+</TabGroup>
+```
+
+En PHP:
+
+```php
+$this->tab1 = $this->findComponentById('tab1');
+$this->grid1 = $this->tab1->findComponentById('grid1');
+```
+
+Respeta la jerarquía declarada en `Components.xml`.
+
+## 51.10 Modules anidados en Components
+
+Components como `Panel` y `TabGroupContent` pueden contener Modules anidados y cargarlos dinámicamente.
+
+Ejemplo JavaScript:
+
+```javascript
+menu.onMenuItemClick = item => panel.openModule(item.route);
+```
+
+Para pestañas dinámicas:
+
+```javascript
+mainTab.openModule(route);
+```
+
+No implementes manualmente una infraestructura paralela de carga dinámica si `Panel`, `TabGroup` o `ModuleNested` ya cubren el caso.
+
+## 51.11 Regla para generar UI
+
+Antes de implementar UI con ATUSAN:
+
+1. identifica el Component adecuado;
+2. consulta `doc/ATUSAN-COMPONENTS.md`;
+3. revisa el ejemplo existente más cercano;
+4. declara el Component y sus Controls en `Components.xml`;
+5. obtén la instancia mediante `findComponentById()`;
+6. configura datos y propiedades desde PHP;
+7. renderiza con `write()`;
+8. utiliza la instancia JavaScript generada por ATUSAN;
+9. utiliza su API y eventos antes de manipular el DOM directamente;
+10. conserva los estilos estándar del Component salvo que el diseño del proyecto requiera ajustes.
+
+No reemplaces Components ATUSAN por implementaciones manuales o librerías externas sin una necesidad concreta.
 
 ---
 
@@ -1618,7 +1850,6 @@ Este comando debe:
 * renombrar `newapp`;
 * configurar la nueva aplicación;
 * establecerla como aplicación activa;
-* mantener sincronizado `.atusan/atusan.json` cuando este archivo exista.
 
 Después de publicar, `newapp` no debe permanecer como aplicación activa.
 
@@ -1757,7 +1988,7 @@ Antes de agregar un paquete Composer verifica si:
 * ATUSAN ya proporciona la funcionalidad;
 * PHP proporciona la funcionalidad de forma nativa;
 * el proyecto ya tiene una solución equivalente;
-* `.atusan/STACK.md` autoriza o define la dependencia.
+* `STACK.md` autoriza o define la dependencia.
 
 No agregues una dependencia únicamente porque sea habitual en otros proyectos.
 
@@ -1829,8 +2060,7 @@ JavaScript
 HTML
 repositorio Git
 AGENTS.md
-.atusan/STACK.md
-.atusan/atusan.json
+STACK.md
 ```
 
 ---
@@ -1841,8 +2071,8 @@ Antes de implementar una tarea, el agente debe seguir esta secuencia:
 
 1. Identificar la aplicación activa.
 2. Identificar el módulo o servicio involucrado.
-3. Leer `.atusan/STACK.md` si existe.
-4. Leer `.atusan/atusan.json` si existe.
+3. Leer `STACK.md` si existe.
+4. Si la tarea involucra Components, Controls o UI ATUSAN, revisar `doc/ATUSAN-COMPONENTS.md`.
 5. Revisar `Route.php`.
 6. Revisar controlador, modelo, servicio, vista o componente relacionado.
 7. Identificar las APIs existentes de ATUSAN que resuelven la necesidad.
@@ -1920,7 +2150,7 @@ Evita variables globales nuevas cuando no sean necesarias.
 
 Mantén compatibilidad con la arquitectura JavaScript existente de ATUSAN y del módulo.
 
-No agregues herramientas de build, npm o frameworks frontend si `.atusan/STACK.md` no los requiere.
+No agregues herramientas de build, npm o frameworks frontend si `STACK.md` no los requiere.
 
 ---
 
@@ -1973,7 +2203,7 @@ JWT es obligatorio para Bearer
 un proyecto requiere múltiples aplicaciones
 ```
 
-Comprueba primero el proyecto, la aplicación activa y `.atusan/STACK.md`.
+Comprueba primero el proyecto, la aplicación activa y `STACK.md`.
 
 ---
 
@@ -2010,9 +2240,9 @@ Cuando una capacidad no exista, implementa la solución más simple compatible c
 
 ---
 
-# 74. .atusan/STACK.md
+# 74. STACK.md
 
-`.atusan/STACK.md` define las decisiones tecnológicas particulares de cada proyecto.
+`STACK.md` define las decisiones tecnológicas particulares de cada proyecto.
 
 Puede especificar, entre otros:
 
@@ -2030,96 +2260,17 @@ convenciones específicas
 
 No modifiques automáticamente el stack.
 
-Si `.atusan/STACK.md` indica una tecnología concreta, utilízala mientras sea compatible con ATUSAN 3.
+Si `STACK.md` indica una tecnología concreta, utilízala mientras sea compatible con ATUSAN 3.
 
 ---
 
 # 75. .atusan/atusan.json
 
-`.atusan/atusan.json` describe el proyecto ATUSAN actual.
-
-Debe utilizarse para conocer información como:
-
-```text
-framework
-versión
-PHP mínimo
-aplicaciones registradas
-aplicación activa
-rutas principales
-frontend
-archivos para agentes
-```
-
-Un proyecto puede contener:
-
-```json
-{
-  "applications": {
-    "active": "ventas",
-    "items": {
-      "ventas": {
-        "namespace": "App",
-        "directory": "app/ventas",
-        "routing": "Route.php"
-      }
-    }
-  }
-}
-```
-
-La propiedad:
-
-```text
-applications.active
-```
-
-identifica la aplicación sobre la cual debe trabajar normalmente el agente.
-
-La colección:
-
-```text
-applications.items
-```
-
-representa las aplicaciones conocidas por el proyecto.
-
-No crees una aplicación adicional únicamente porque `applications.items` soporte múltiples elementos.
-
-En el caso normal debe existir una sola aplicación funcional.
+Retirado de ATUSAN.
 
 ---
 
 # 76. Sincronización de aplicaciones
-
-La aplicación activa definida en la configuración del proyecto y en `.atusan/atusan.json` debe permanecer sincronizada.
-
-Después de ejecutar:
-
-```bash
-atusan_cli publish --name ventas
-```
-
-el manifiesto debe representar:
-
-```json
-{
-  "applications": {
-    "active": "ventas",
-    "items": {
-      "ventas": {
-        "namespace": "App",
-        "directory": "app/ventas",
-        "routing": "Route.php"
-      }
-    }
-  }
-}
-```
-
-No mantengas `newapp` registrado después de que haya sido reemplazado por la aplicación publicada.
-
-Si existen aplicaciones adicionales legítimas, no las elimines al publicar otra aplicación.
 
 ---
 
@@ -2133,7 +2284,7 @@ Si la respuesta es sí, utiliza ATUSAN.
 
 Si la respuesta es no, utiliza primero las capacidades nativas de PHP, JavaScript, HTML o CSS.
 
-Introduce una dependencia externa únicamente cuando exista una necesidad concreta y sea compatible con `.atusan/STACK.md`.
+Introduce una dependencia externa únicamente cuando exista una necesidad concreta y sea compatible con `STACK.md`.
 
 ---
 

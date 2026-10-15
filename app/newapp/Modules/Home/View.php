@@ -1,7 +1,3 @@
-<?php 
-// Ejercicio CURL
-
-?>
 <!-- CSS -->
 <style>
   h1, h3, h6, p {
@@ -24,14 +20,3 @@
     <p>Esta página ha sido generada por Atusan.</p>
   </div>
 </div>
-?>
-<!-- JAVASCRIPT -->
-<script>
-  Home.onOpen = function() {
-
-    this.registerResizeListener();
-  };
-  Home.onResize = function() {
-
-  };
-</script>

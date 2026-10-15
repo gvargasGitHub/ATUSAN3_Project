@@ -5,12 +5,12 @@ Este archivo define las decisiones tecnológicas específicas de este proyecto.
 Debe utilizarse junto con:
 
 * `AGENTS.md`
-* `atusan.json`
+* `.atusan/atusan.json`
 * `composer.json`
 
 `AGENTS.md` define cómo trabajar con ATUSAN 3.
 
-`atusan.json` describe estructuralmente el proyecto.
+`.atusan/atusan.json` describe estructuralmente el proyecto.
 
 `STACK.md` define el stack tecnológico elegido para esta aplicación.
 
@@ -263,7 +263,7 @@ No almacenar credenciales en:
 
 * PHP
 * JavaScript
-* `atusan.json`
+* `.atusan/atusan.json`
 * `STACK.md`
 * repositorio Git
 
@@ -586,7 +586,7 @@ Antes de generar o modificar código, revisar:
 ```text
 AGENTS.md
 STACK.md
-atusan.json
+.atusan/atusan.json
 composer.json
 Route.php
 ```
