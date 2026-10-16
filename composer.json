@@ -4,5 +4,8 @@
     "require": {
       "php": "^8.2",
       "gvargas/atusan-core":"^3.0"
+    },
+    "require-dev": {
+        "gvargas/atusan-agents": "^1"
     }
 }
