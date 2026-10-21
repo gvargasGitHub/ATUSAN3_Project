@@ -1,21 +1,14 @@
 {
     "name": "gvargas/atusan-project",
+    "description": "Plantilla base para crear proyectos con ATUSAN 3 Framework",
     "type": "project",
+    "license": "MIT",
     "require": {
-      "php": "^8.2",
-      "gvargas/atusan-core":"^3.0"
+        "php": "^8.2",
+        "gvargas/atusan-core": "^3.0"
     },
     "require-dev": {
         "gvargas/atusan-agents": "^1",
-        "gvargas/atusan-cli": "@dev"
-    },
-    "repositories": [
-        {
-            "type": "path",
-            "url": "../cli",
-            "options": {
-                "symlink": true
-            }
-        }
-    ]
+        "gvargas/atusan-cli": "^1"
+    }
 }

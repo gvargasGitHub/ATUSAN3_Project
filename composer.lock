@@ -4,28 +4,25 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "237643f10126286d0af46db7a3e2f74d",
+    "content-hash": "bc7bc1c44de5367f4b9165be80bd53d1",
     "packages": [
         {
             "name": "gvargas/atusan-core",
-            "version": "v3.0.27",
+            "version": "v3.0.28",
             "source": {
                 "type": "git",
                 "url": "https://github.com/gvargasGitHub/ATUSAN3_Core.git",
-                "reference": "620ace64e4b759dfc76b3b468d7664d837d3eb98"
+                "reference": "27c6f41aa45f0a9d21db7e85e5239474e5ddd6d3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/gvargasGitHub/ATUSAN3_Core/zipball/620ace64e4b759dfc76b3b468d7664d837d3eb98",
-                "reference": "620ace64e4b759dfc76b3b468d7664d837d3eb98",
+                "url": "https://api.github.com/repos/gvargasGitHub/ATUSAN3_Core/zipball/27c6f41aa45f0a9d21db7e85e5239474e5ddd6d3",
+                "reference": "27c6f41aa45f0a9d21db7e85e5239474e5ddd6d3",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.2"
             },
-            "bin": [
-                "cli/bin/atusan-cli"
-            ],
             "type": "library",
             "extra": {
                 "atusan": {
@@ -44,9 +41,9 @@
             "description": "ATUSAN PHP Framework",
             "support": {
                 "issues": "https://github.com/gvargasGitHub/ATUSAN3_Core/issues",
-                "source": "https://github.com/gvargasGitHub/ATUSAN3_Core/tree/v3.0.27"
+                "source": "https://github.com/gvargasGitHub/ATUSAN3_Core/tree/v3.0.28"
             },
-            "time": "2026-10-20T18:57:40+00:00"
+            "time": "2026-10-21T22:36:41+00:00"
         }
     ],
     "packages-dev": [
@@ -83,11 +80,17 @@
         },
         {
             "name": "gvargas/atusan-cli",
-            "version": "dev-main",
+            "version": "v1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/gvargasGitHub/ATUSAN3_Cli.git",
+                "reference": "c3ce2bbb7ddd6837b413c7f2889aec7dcf76ed22"
+            },
             "dist": {
-                "type": "path",
-                "url": "../cli",
-                "reference": "ddca976c5b93e813872702762b44e78342feae01"
+                "type": "zip",
+                "url": "https://api.github.com/repos/gvargasGitHub/ATUSAN3_Cli/zipball/c3ce2bbb7ddd6837b413c7f2889aec7dcf76ed22",
+                "reference": "c3ce2bbb7ddd6837b413c7f2889aec7dcf76ed22",
+                "shasum": ""
             },
             "require": {
                 "gvargas/atusan-core": "^3.0",
@@ -102,21 +105,21 @@
                     "AtusanCLI\\": "src/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
             "description": "Command Line Interface for ATUSAN 3",
-            "transport-options": {
-                "symlink": true,
-                "relative": true
-            }
+            "support": {
+                "issues": "https://github.com/gvargasGitHub/ATUSAN3_Cli/issues",
+                "source": "https://github.com/gvargasGitHub/ATUSAN3_Cli/tree/v1.0"
+            },
+            "time": "2026-10-21T15:42:05+00:00"
         }
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "gvargas/atusan-cli": 20
-    },
+    "stability-flags": {},
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
