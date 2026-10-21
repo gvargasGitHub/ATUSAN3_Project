@@ -1,3 +1,13 @@
 *.code-workspace
 *.gitignore
 tags.xml
+
+# Dependencias Composer
+/vendor/
+
+# Configuración local
+/.env
+
+# Documentación generada por ATUSAN Agents
+/AGENTS.md
+/doc/ATUSAN-COMPONENTS.md
