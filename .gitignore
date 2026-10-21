@@ -4,6 +4,7 @@ tags.xml
 
 # Dependencias Composer
 /vendor/
+/composer.lock
 
 # Configuración local
 /.env
