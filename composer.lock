@@ -1,0 +1,127 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "237643f10126286d0af46db7a3e2f74d",
+    "packages": [
+        {
+            "name": "gvargas/atusan-core",
+            "version": "v3.0.27",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/gvargasGitHub/ATUSAN3_Core.git",
+                "reference": "620ace64e4b759dfc76b3b468d7664d837d3eb98"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/gvargasGitHub/ATUSAN3_Core/zipball/620ace64e4b759dfc76b3b468d7664d837d3eb98",
+                "reference": "620ace64e4b759dfc76b3b468d7664d837d3eb98",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.2"
+            },
+            "bin": [
+                "cli/bin/atusan-cli"
+            ],
+            "type": "library",
+            "extra": {
+                "atusan": {
+                    "public": "public/"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Atusan\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "ATUSAN PHP Framework",
+            "support": {
+                "issues": "https://github.com/gvargasGitHub/ATUSAN3_Core/issues",
+                "source": "https://github.com/gvargasGitHub/ATUSAN3_Core/tree/v3.0.27"
+            },
+            "time": "2026-10-20T18:57:40+00:00"
+        }
+    ],
+    "packages-dev": [
+        {
+            "name": "gvargas/atusan-agents",
+            "version": "v1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/gvargasGitHub/ATUSAN3_AgentsIA.git",
+                "reference": "419d3e1989b7b5858fcdd74e586bdd0c118342e5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/gvargasGitHub/ATUSAN3_AgentsIA/zipball/419d3e1989b7b5858fcdd74e586bdd0c118342e5",
+                "reference": "419d3e1989b7b5858fcdd74e586bdd0c118342e5",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Gabriel Vargas"
+                }
+            ],
+            "description": "Soporte para Agentes IA de desarrollo",
+            "support": {
+                "issues": "https://github.com/gvargasGitHub/ATUSAN3_AgentsIA/issues",
+                "source": "https://github.com/gvargasGitHub/ATUSAN3_AgentsIA/tree/v1.1"
+            },
+            "time": "2026-10-16T16:54:15+00:00"
+        },
+        {
+            "name": "gvargas/atusan-cli",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "../cli",
+                "reference": "ddca976c5b93e813872702762b44e78342feae01"
+            },
+            "require": {
+                "gvargas/atusan-core": "^3.0",
+                "php": "^8.2"
+            },
+            "bin": [
+                "bin/atusan-cli"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "AtusanCLI\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Command Line Interface for ATUSAN 3",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        }
+    ],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "gvargas/atusan-cli": 20
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": {
+        "php": "^8.2"
+    },
+    "platform-dev": {},
+    "plugin-api-version": "2.9.0"
+}
